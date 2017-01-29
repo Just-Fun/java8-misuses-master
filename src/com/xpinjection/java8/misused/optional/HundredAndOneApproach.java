@@ -10,6 +10,17 @@ import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 
 public class HundredAndOneApproach {
+    public static void main(String[] args) {
+        HundredAndOneApproach approach = new HundredAndOneApproach();
+        Person person = approach.new Person();
+        Optional<Car> car = ofNullable(person).flatMap(Person::getCar);
+        Optional<Insurance> insurance = car.flatMap(Car::getInsurance);
+        Optional<String> name = insurance.map(Insurance::getName);
+        System.out.println(name);// Optional.empty
+        String unknown = insurance.map(Insurance::getName).orElse("Unknown");
+//        .orElse -> Return the value if present, otherwise return {@code other}.
+        System.out.println(unknown); // "Unknown"
+    }
     @Ugly
     class SameOldImperativeStyle {
         public String getPersonCarInsuranceName(Person person) {
@@ -66,7 +77,8 @@ public class HundredAndOneApproach {
     class UsingFlatMap {
         public String getCarInsuranceNameFromPersonUsingFlatMap(Person person) {
             return ofNullable(person)
-                    .flatMap(Person::getCar)
+                    .flatMap(Person::getCar) // similar to {@link #map(Function)},
+//                   but the provided mapper is one whose result is already an {@code Optional}
                     .flatMap(Car::getInsurance)
                     .map(Insurance::getName)
                     .orElse("Unknown");

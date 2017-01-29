@@ -7,6 +7,15 @@ import com.xpinjection.java8.misused.User;
 import java.util.Optional;
 
 public class StrictCheckOfValuePresence {
+    public static void main(String[] args) {
+        User userNull = null;
+//        Optional<User> userNull1 = Optional.of(userNull);// NullPointerException
+//        System.out.println(userNull1);
+        Optional<User> userNull2 = Optional.ofNullable(userNull);
+        System.out.println(userNull2);
+        StrictCheckOfValuePresence presence = new StrictCheckOfValuePresence();
+    }
+
     @Ugly
     class ManualCheckForPresenceToThrowException {
         public String getUserName(Long userId) {
@@ -22,7 +31,7 @@ public class StrictCheckOfValuePresence {
     class OrElseThrowUsage {
         public String getUserName(Long userId) {
             return findById(userId)
-                    .orElseThrow(() -> new IllegalStateException("User not found"))
+                    .orElseThrow(() -> new IllegalStateException("User not found")) //@throws X if there is no value present
                     .getName();
         }
     }

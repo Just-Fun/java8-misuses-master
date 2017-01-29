@@ -14,6 +14,7 @@ public class OptionalForCollections {
     @Ugly
     class TooVerbose {
         public User findAnyAdmin() {
+//            Don't use Otional for collections!!!
             Optional<List<User>> users = findUsersByRole(ADMIN_ROLE);
             if (users.isPresent() && !users.get().isEmpty()) {
                 return users.get().get(0);

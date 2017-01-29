@@ -30,6 +30,7 @@ public class InternalOptionalUsage {
         public void process(User user) {
             //some processing
             printer.ifPresent(p -> p.print(user));
+//            ifPresent -> If a value is present, invoke the specified consumer with the value, otherwise do nothing.
         }
 
         public void setPrinter(Printer printer) {
