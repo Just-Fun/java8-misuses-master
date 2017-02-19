@@ -4,6 +4,7 @@ import com.xpinjection.java8.misused.User;
 import com.xpinjection.java8.misused.Annotations.Good;
 import com.xpinjection.java8.misused.Annotations.Ugly;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
@@ -21,5 +22,10 @@ public class ListSorting {
         public void sortUsersById(List<User> users) {
             users.sort(comparing(User::getId));
         }
+
+        public void sortUsersById2(List<User> users) {
+            users.sort(Comparator.comparingLong(User::getId));
+        }
+
     }
 }

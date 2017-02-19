@@ -27,6 +27,9 @@ public class AvoidComplexLambdas {
         Set<User> users = reference.checkPermission(Permission.EDIT);
         System.out.println(Collections.singletonList(users));
 
+        boolean test = reference.hasPermission(Permission.EDIT).test(user);
+        System.out.println(test);
+
         boolean permission = reference.hasEditPermission(user);
         System.out.println(permission);
 
@@ -54,6 +57,7 @@ public class AvoidComplexLambdas {
         private Predicate<User> hasPermission(Permission permission) {
             return user -> user.getRoles().stream()
                     .map(Role::getPermissions)
+//                    .allMatch(permissions -> permissions.contains(permission));
                     .anyMatch(permissions -> permissions.contains(permission));
         }
 
