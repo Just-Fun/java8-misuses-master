@@ -17,7 +17,7 @@ public class ClassDesign {
 
         public void usage(AmbiguousService<String> service) {
             //which method you intended to call??? both are acceptable.
-            service.process(String::toUpperCase);
+            String process = service.process(String::toUpperCase);
         }
     }
 
@@ -31,7 +31,7 @@ public class ClassDesign {
 
         public void usage(ClearService<String> service) {
             //now it's clear which method will be called.
-            service.convert(String::toUpperCase);
+            String convert = service.convert(String::toUpperCase);
         }
     }
 }
