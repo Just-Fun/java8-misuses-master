@@ -33,6 +33,7 @@ public class AvoidLongLambdas {
 
         public List<UserDto> convertToDto(List<User> users){
             return users.stream()
+//                    .map(this::convertToDto)
                     .map(toDto)
                     .collect(toList());
         }

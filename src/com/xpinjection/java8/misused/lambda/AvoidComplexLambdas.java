@@ -5,7 +5,9 @@ import com.xpinjection.java8.misused.Annotations.Ugly;
 import com.xpinjection.java8.misused.Permission;
 import com.xpinjection.java8.misused.Role;
 import com.xpinjection.java8.misused.User;
+import com.xpinjection.java8.misused.lambda.collections.Helper;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -13,7 +15,22 @@ import java.util.function.Predicate;
 import static java.util.stream.Collectors.toSet;
 
 public class AvoidComplexLambdas {
-    private final Set<User> users = new HashSet<>();
+    private static final Set<User> users = new HashSet<>();
+
+
+    public static void main(String[] args) {
+        User user = Helper.setUser();
+        users.add(user);
+
+        ComplexityExtractedToMethodReference reference = new ComplexityExtractedToMethodReference();
+
+        Set<User> users = reference.checkPermission(Permission.EDIT);
+        System.out.println(Collections.singletonList(users));
+
+        boolean permission = reference.hasEditPermission(user);
+        System.out.println(permission);
+
+    }
 
     @Ugly
     class UsingComplexLambdaInPlace {
@@ -26,7 +43,7 @@ public class AvoidComplexLambdas {
     }
 
     @Good
-    class ComplexityExtractedToMethodReference {
+    static class ComplexityExtractedToMethodReference {
         public Set<User> checkPermission(Permission permission) {
             return users.stream()
                     //.filter(this::hasEditPermission)
