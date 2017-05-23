@@ -5,8 +5,11 @@ package com.xpinjection.java8.misused.practice;
  */
 public class Main {
     public static void main(String[] args) {
-        Converter<String, Integer> converter = new ConverterStrToInt<>();
-        Integer converted = converter.convert("123");
+//        Converter<String, Integer> converter = (from) -> Integer.valueOf(from);
+//        Converter<String, Integer> converter = (from) -> Integer.parseInt(from);
+//        Converter<String, Integer> converter = Integer::parseInt;
+        ConverterStrToInt converterStrToInt = new ConverterStrToInt();
+        Integer converted = converterStrToInt.convert("123");
         System.out.println(converted);    // 123
     }
 }
