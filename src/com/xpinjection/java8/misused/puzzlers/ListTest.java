@@ -9,24 +9,26 @@ import java.util.List;
  */
 public class ListTest {
 
+    public static final String CHUCK = "Chuck";
+
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>(Arrays.asList("Arnie", "Chuck", "Slay"));
+        List<String> list = new ArrayList<>(Arrays.asList("Arnie", CHUCK, "Slay"));
 
       /*  list.stream().forEach(s -> { // NullPointerException
-            if (s.equals("Chuck")) {
+            if (s.equals(CHUCK)) {
+                list.remove(s);
+            }
+        });
+
+        list.forEach(s -> { // ConcurrentModificationException
+            if (s.equals(CHUCK)) {
                 list.remove(s);
             }
         });*/
 
-       /* list.forEach(s -> { // ConcurrentModificationException
-            if (s.equals("Chuck")) {
-                list.remove(s);
-            }
-        });*/
-
-        list.removeIf(s -> s.equals("Chuck"));
+        list.removeIf(s -> s.equals(CHUCK));
 //        or
-        list.removeIf("Chuck"::equals);
+        list.removeIf(CHUCK::equals);
 
         System.out.println(list);
     }
